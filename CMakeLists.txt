@@ -985,7 +985,7 @@ else (UNIX)
   else ()
     set(BASE_CFLAGS "${BASE_CFLAGS} /MT")
   endif ()
-  set(WARN "/W4 /WX")
+  set(WARN "/W0 /WX-")
   # Default from cmake has /W3 so remove to avoid warning about overriding
   string(REGEX REPLACE "/W[0-9]" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
   string(REGEX REPLACE "/W[0-9]" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")

@@ -111,10 +111,14 @@ instrace(void *drcontext)
     /* We use libc's fprintf as it is buffered and much faster than dr_fprintf
      * for repeated printing that dominates performance, as the printing does here.
      */
+
+    disassemble_set_syntax(DR_DISASM_INTEL);
+
     for (ins_ref = (ins_ref_t *)data->buf_base; ins_ref < buf_ptr; ins_ref++) {
         /* We use PIFX to avoid leading zeroes and shrink the resulting file. */
-        fprintf(data->logf, PIFX ",%s\n", (ptr_uint_t)ins_ref->pc,
-                decode_opcode_name(ins_ref->opcode));
+        /*fprintf(data->logf, PIFX ",%s\n", (ptr_uint_t)ins_ref->pc,
+                decode_opcode_name(ins_ref->opcode));*/
+        disassemble(drcontext, ins_ref->pc, data->log);
         data->num_refs++;
     }
     BUF_PTR(data->seg_base) = data->buf_base;
